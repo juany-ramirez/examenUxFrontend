@@ -4,25 +4,23 @@
 		<table class="table centered">
 			<thead>
 				<tr>
-					<th>Título</th>
-					<th>Género</th>
-					<th>Autor</th>
-					<th>Publicación</th>
-					<th>Editorial</th>
-					<th>Descripción</th>
+					<th>Nombre</th>
+					<th>Dificultad</th>
+					<th>Aprendizaje</th>
+					<th>Modificar</th>
 					<th>Borrar</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="book in books">
-					<td>{{book.titulo}}</td>
-					<td>{{book.genero}}</td>
-					<td>{{book.autor}}</td>
-					<td>{{book.publicacion}}</td>
-					<td>{{book.editorial}}</td>
-					<td>{{book.descripcion}}</td>
+				<tr v-for="hechizo in hechizos">
+					<td>{{hechizo.nombre}}</td>
+					<td>{{hechizo.dificultad}}</td>
+					<td>{{hechizo.aprendizaje}}</td>
 					<td>
-						<a v-on:click="deleteBook(book._id)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>
+						<a v-on:click="startToModifyBebida(bebida)" class="btn-floating btn-small waves-effect waves-light grey darken-4"><i class="material-icons">arrow_downward</i></a>
+					</td>
+					<td>
+						<a v-on:click="deleteHechizo(hechizo._id)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>
 					</td>
 				</tr>
 			</tbody>
@@ -36,49 +34,49 @@
 	  <div id="test-swipe-1" class="col s12">
 			<div class="row">
 	        <div class="input-field col s6">
-	          <input type="text" v-model="book.titulo" :disabled="loading"  id="Titulo">
+	          <input type="text" v-model="hechizo.titulo" :disabled="loading"  id="Titulo">
 	          <label for="Titulo">Titulo</label>
 	        </div>
 					<div class="input-field col s6">
-	          <input v-model="book.genero" :disabled="loading" id="Genero" type="text"   class="validate">
+	          <input v-model="hechizo.genero" :disabled="loading" id="Genero" type="text"   class="validate">
 	          <label for="Genero">Genero</label>
 	        </div>
 					<div class="input-field col s6">
-	          <input v-model="book.autor" :disabled="loading"  id="Autor" type="text" class="validate">
+	          <input v-model="hechizo.autor" :disabled="loading"  id="Autor" type="text" class="validate">
 	          <label for="Autor">Autor</label>
 	        </div>
 					<div class="input-field col s6">
-	          <input type="number" v-model="book.publicacion" :disabled="loading"  id="Publicación">
+	          <input type="number" v-model="hechizo.publicacion" :disabled="loading"  id="Publicación">
 	          <label for="Publicación">Publicación</label>
 	        </div>
 					<div class="input-field col s6">
-	          <input v-model="book.editorial" :disabled="loading" id="Editorial" type="text"  class="validate">
+	          <input v-model="hechizo.editorial" :disabled="loading" id="Editorial" type="text"  class="validate">
 	          <label for="Editorial">Editorial</label>
 	        </div>
 					<div class="row">
 				    <form class="col s12">
 				      <div class="row">
 				        <div class="input-field col s12">
-				          <textarea v-model="book.descripcion" :disabled="loading"  id="descripcion" type="text"  class="materialize-textarea"></textarea>
+				          <textarea v-model="hechizo.descripcion" :disabled="loading"  id="descripcion" type="text"  class="materialize-textarea"></textarea>
 				          <label for="descripcion">Descripción</label>
 				        </div>
 				      </div>
 				    </form>
 				  </div>
 					<div class="input-field col s6">
-	          <input v-model="book.keywords" :disabled="loading" id="Keywords" type="text"  class="validate">
+	          <input v-model="hechizo.keywords" :disabled="loading" id="Keywords" type="text"  class="validate">
 	          <label for="Keywords">Keywords</label>
 	        </div>
 					<div class="input-field col s6">
-	          <input v-model="book.copias_total" :disabled="loading"  id="Total de Copias" type="number" class="validate">
+	          <input v-model="hechizo.copias_total" :disabled="loading"  id="Total de Copias" type="number" class="validate">
 	          <label for="Total de Copias">Total de Copias</label>
 	        </div>
 					<div class="input-field col s6">
-	          <input v-model="book.copias_disponible" :disabled="loading"  id="Copias Disponibles" type="number" class="validate">
+	          <input v-model="hechizo.copias_disponible" :disabled="loading"  id="Copias Disponibles" type="number" class="validate">
 	          <label for="Copias Disponibles">Copias Disponibles</label>
 	        </div>
 	      </div>
-				<a class="waves-effect waves-light btn-large" v-on:click="createBook" :disabled="loading" id="boton">
+				<a class="waves-effect waves-light btn-large" v-on:click="createHechizo" :disabled="loading" id="boton">
 					<i class="material-icons left">create</i>Crear
 				</a>
 
@@ -87,55 +85,55 @@
 
 			<div class="input-field col s12">
 			 <select v-model="selected" >
-				 <option v-for="book in books" v-bind:value="book"value="1"> {{book.titulo}} </option>
+				 <option v-for="hechizo in hechizos" v-bind:value="hechizo"value="1"> {{hechizo.titulo}} </option>
 			 </select>
 			 <label>Selected: {{ selected }}</label>
 		 </div>
 		 <div class="row">
 				 <div class="input-field col s6">
-					 <input type="text" v-model="book.titulo" :disabled="loading"  id="Titulo1">
+					 <input type="text" v-model="hechizo.titulo" :disabled="loading"  id="Titulo1">
 					 <label for="Titulo1">Titulo</label>
 				 </div>
 				 <div class="input-field col s6">
-					 <input v-model="book.genero" :disabled="loading" id="Genero1" type="text"   class="validate">
+					 <input v-model="hechizo.genero" :disabled="loading" id="Genero1" type="text"   class="validate">
 					 <label for="Genero1">Genero</label>
 				 </div>
 				 <div class="input-field col s6">
-					 <input v-model="book.autor" :disabled="loading"  id="Autor1" type="text" class="validate">
+					 <input v-model="hechizo.autor" :disabled="loading"  id="Autor1" type="text" class="validate">
 					 <label for="Autor1">Autor</label>
 				 </div>
 				 <div class="input-field col s6">
-					 <input type="number" v-model="book.publicacion" :disabled="loading"  id="Publicación1">
+					 <input type="number" v-model="hechizo.publicacion" :disabled="loading"  id="Publicación1">
 					 <label for="Publicación1">Publicación</label>
 				 </div>
 				 <div class="input-field col s6">
-					 <input v-model="book.editorial" :disabled="loading" id="Editorial1" type="text"  class="validate">
+					 <input v-model="hechizo.editorial" :disabled="loading" id="Editorial1" type="text"  class="validate">
 					 <label for="Editorial1">Editorial</label>
 				 </div>
 				 <div class="row">
 					 <form class="col s12">
 						 <div class="row">
 							 <div class="input-field col s12">
-								 <textarea v-model="book.descripcion" :disabled="loading"  id="descripcion1" type="text"  class="materialize-textarea"></textarea>
+								 <textarea v-model="hechizo.descripcion" :disabled="loading"  id="descripcion1" type="text"  class="materialize-textarea"></textarea>
 								 <label for="descripcion1">Descripción</label>
 							 </div>
 						 </div>
 					 </form>
 				 </div>
 				 <div class="input-field col s6">
-					 <input v-model="book.keywords" :disabled="loading" id="Keywords1" type="text"  class="validate">
+					 <input v-model="hechizo.keywords" :disabled="loading" id="Keywords1" type="text"  class="validate">
 					 <label for="Keywords1">Keywords</label>
 				 </div>
 				 <div class="input-field col s6">
-					 <input v-model="book.copias_total" :disabled="loading"  id="Total de Copias1" type="number" class="validate">
+					 <input v-model="hechizo.copias_total" :disabled="loading"  id="Total de Copias1" type="number" class="validate">
 					 <label for="Total de Copias1">Total de Copias</label>
 				 </div>
 				 <div class="input-field col s6">
-					 <input v-model="book.copias_disponible" :disabled="loading"  id="Copias Disponibles1" type="number" class="validate">
+					 <input v-model="hechizo.copias_disponible" :disabled="loading"  id="Copias Disponibles1" type="number" class="validate">
 					 <label for="Copias Disponibles1">Copias Disponibles</label>
 				 </div>
 			 </div>
-				<a class="waves-effect waves-light btn-large" v-on:click="createBook" :disabled="loading" id="boton">
+				<a class="waves-effect waves-light btn-large" v-on:click="createHechizo" :disabled="loading" id="boton">
 					<i class="material-icons left">update</i>Update</a>
 
 		</div>
@@ -149,51 +147,51 @@
 		name: 'home',
 		data(){
 			return{
-				books: [],
-				book:{
+				hechizos: [],
+				hechizo:{
 				},
 				loading: false
 			}
 		},
 		methods: {
-			getBooks(){
-				this.$http.get(`${baseUrl.uri}/books`).then((response)=>{
-					this.books=response.body;
+			getHechizos(){
+				this.$http.get(`${baseUrl.uri}/hechizos`).then((response)=>{
+					this.hechizos=response.body;
 				});
 			},
-			createBook(){
+			createHechizo(){
 				this.loading=true;
-				this.$http.post(`${baseUrl.uri}/books/create`,this.book)
+				this.$http.post(`${baseUrl.uri}/hechizos/create`,this.hechizo)
 				.then((response)=>{
 					this.loading=false;
 					if(response.body.success){
 						swal("Creado con exito!", "Los cambios estan en la tabla", "success");
-						this.getBooks();
+						this.getHechizos();
 					}else{
 						sweetAlert("Oops...", "Error al crear", "error");
 					}
 				});
 			},
-			modifyBook(id){
+			modifyHechizo(id){
 				this.loading=true;
-				this.$http.update(`${baseUrl.uri}/books/update/`+identidad,this.book)
+				this.$http.update(`${baseUrl.uri}/hechizos/update/`+identidad,this.hechizo)
 				.then((response)=>{
 					this.loading=false;
 					if(response.body.success){
 						swal("Creado con exito!", "Los cambios estan en la tabla", "success");
-						this.getBooks();
+						this.getHechizos();
 					}else{
 						sweetAlert("Oops...", "Error al crear", "error");
 					}
 				});
 			},
-			deleteBook(id){
+			deleteHechizo(id){
 					this.loading=true;
-					this.$http.delete(`${baseUrl.uri}/books/delete/`+id)
+					this.$http.delete(`${baseUrl.uri}/hechizos/delete/`+id)
 						.then((response)=>{
 						this.loading=false;
 						if(response.body.success){
-							this.getBooks();
+							this.getHechizos();
 							swal("Deleted!", "Se ha eliminado el Libro", "success");
 						}else{
 							sweetAlert("Oops...", "Error al crear", "error");
@@ -201,7 +199,7 @@
 					});
 					// swal({
 					//   title: "Are you sure?",
-					//   text: "You will not be able to recover this book!",
+					//   text: "You will not be able to recover this hechizo!",
 					//   type: "warning",
 					//   showCancelButton: true,
 					//   confirmButtonColor: "#DD6B55",
@@ -221,7 +219,7 @@
 			}
 		},
 		beforeMount(){
-			this.getBooks();
+			this.getHechizos();
 		},
 		mounted(){
 			$('ul.tabs').tabs();
