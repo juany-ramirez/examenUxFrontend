@@ -1,8 +1,6 @@
 <template>
 	<div class="container">
 		<br><br>
-
-    <br>
     <div class="row center">
 			<div class="col s8">
         <nav >
@@ -38,25 +36,24 @@
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th>Título</th>
-					<th>Autor</th>
-					<th>Género</th>
-					<th>Numero de Copias</th>
-					<th>Copias Prestadas</th>
-					<th>Borrrow</th>
+					<th>username</th>
+					<th>ocupacion</th>
+					<th>nacimiento</th>
+					<th>creencias</th>
+					<th>Add</th>
 				</tr>
 			</thead>
 
 			<tbody>
-				<tr v-for="book in books">
-					<td>{{book._id}}</td>
-					<td>{{book.titulo}}</td>
-					<td>{{book.autor}}</td>
-					<td>{{book.genero}}</td>
-					<td>{{book.copias_total}}</td>
-					<td>{{book.copias_disponible}}</td>
+				<tr v-for="user in users">
+					<td>{{user._id}}</td>
+					<td>{{user.username}}</td>
+					<td>{{user.ocupacion}}</td>
+					<td>{{user.nacimiento}}</td>
+					<td>{{user.creencias}}</td>
+					<td>{{user.copias_disponible}}</td>
 					<td>
-						<a v-on:click="prestarBook(book._id)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">subtitles</i></a>
+						<a v-on:click="agregarAmigo(user._id)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
 					</td>
 				</tr>
 			</tbody>
@@ -71,27 +68,27 @@
 		name: 'prestamo',
 		data(){
 			return{
-				books: [],
+				users: [],
 				elElegido: 1,
-				book:{
+				user:{
 				},
 				searchText:'',
 				loading: false
 			}
 		},
 		methods: {
-			getBooks(){
-				this.$http.get(`${baseUrl.uri}/books`).then((response)=>{
-					this.books=response.body;
+			getUsers(){
+				this.$http.get(`${baseUrl.uri}/users`).then((response)=>{
+					this.users=response.body;
 				});
 			},
-			prestarBook(id){
+			agregarAmigo(id){
 				this.loading=true;
-				this.$http.put(`${baseUrl.uri}/books/borrowbook/`+id)
+				this.$http.put(`${baseUrl.uri}/users/borrowuser/`+id)
 				.then((response)=>{
 						this.loading=false;
 						if(response.body === 'updated succesfully'){
-							this.getBooks();
+							this.getUsers();
 							swal("Se ha realizado el prestamo!", "Los cambios estan en la tabla", "success");
 						}else{
 							sweetAlert("Oops...", response.body, "error");
@@ -102,33 +99,33 @@
 				console.log(this.elElegido);
 				console.log(this.searchText);
 				if(this.searchText===''){
-					this.$http.get(`${baseUrl.uri}/books`).then((response)=>{
+					this.$http.get(`${baseUrl.uri}/users`).then((response)=>{
 				this.loading=false;
-						this.books=response.body;
+						this.users=response.body;
 					});
 				}else if(elElegido ===1){
-						this.$http.get(`${baseUrl.uri}/books/searchbyname/`+searchText).then((response)=>{
-							this.books=response.body;
+						this.$http.get(`${baseUrl.uri}/users/searchbyname/`+searchText).then((response)=>{
+							this.users=response.body;
 						});
 						searchText='';
 				}else if(elElegido ===2){
-						this.$http.get(`${baseUrl.uri}/books/searchbyid/`+searchText).then((response)=>{
-							this.books=response.body;
+						this.$http.get(`${baseUrl.uri}/users/searchbyid/`+searchText).then((response)=>{
+							this.users=response.body;
 						});
 						searchText='';
 				}else if(elElegido ===3){
-						this.$http.get(`${baseUrl.uri}/books/searchbygenre/`+searchText).then((response)=>{
-							this.books=response.body;
+						this.$http.get(`${baseUrl.uri}/users/searchbygenre/`+searchText).then((response)=>{
+							this.users=response.body;
 						});
 						searchText='';
 				}else if(elElegido ===4){
-						this.$http.get(`${baseUrl.uri}/books/searchbyauthor/`+searchText).then((response)=>{
-							this.books=response.body;
+						this.$http.get(`${baseUrl.uri}/users/searchbyauthor/`+searchText).then((response)=>{
+							this.users=response.body;
 						});
 						searchText='';
 				}else if(elElegido ===5){
-						this.$http.get(`${baseUrl.uri}/books/searchbykey`,searchText).then((response)=>{
-							this.books=response.body;
+						this.$http.get(`${baseUrl.uri}/users/searchbykey`,searchText).then((response)=>{
+							this.users=response.body;
 						});
 						searchText='';
 				}
@@ -141,7 +138,7 @@
 			}
 		},
 		beforeMount(){
-			this.getBooks();
+			this.getUsers();
 		},
 		mounted(){
 			$('#searchFilter').material_select();

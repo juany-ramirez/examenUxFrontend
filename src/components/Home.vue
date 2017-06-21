@@ -17,7 +17,7 @@
 					<td>{{hechizo.dificultad}}</td>
 					<td>{{hechizo.aprendizaje}}</td>
 					<td>
-						<a v-on:click="startToModifyBebida(bebida)" class="btn-floating btn-small waves-effect waves-light grey darken-4"><i class="material-icons">arrow_downward</i></a>
+						<a v-on:click="startToModifyBebida(hechizo)" class="btn-floating btn-small waves-effect waves-light grey darken-4"><i class="material-icons">arrow_downward</i></a>
 					</td>
 					<td>
 						<a v-on:click="deleteHechizo(hechizo._id)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">delete</i></a>
@@ -34,46 +34,16 @@
 	  <div id="test-swipe-1" class="col s12">
 			<div class="row">
 	        <div class="input-field col s6">
-	          <input type="text" v-model="hechizo.titulo" :disabled="loading"  id="Titulo">
-	          <label for="Titulo">Titulo</label>
+	          <input type="text" v-model="hechizo.nombre" :disabled="loading"  id="Nombre">
+	          <label for="Nombre">Nombre</label>
 	        </div>
 					<div class="input-field col s6">
-	          <input v-model="hechizo.genero" :disabled="loading" id="Genero" type="text"   class="validate">
-	          <label for="Genero">Genero</label>
+	          <input v-model="hechizo.dificultad" :disabled="loading" id="Dificultad" type="text"   class="validate">
+	          <label for="Dificultad">Dificultad</label>
 	        </div>
 					<div class="input-field col s6">
-	          <input v-model="hechizo.autor" :disabled="loading"  id="Autor" type="text" class="validate">
-	          <label for="Autor">Autor</label>
-	        </div>
-					<div class="input-field col s6">
-	          <input type="number" v-model="hechizo.publicacion" :disabled="loading"  id="Publicación">
-	          <label for="Publicación">Publicación</label>
-	        </div>
-					<div class="input-field col s6">
-	          <input v-model="hechizo.editorial" :disabled="loading" id="Editorial" type="text"  class="validate">
-	          <label for="Editorial">Editorial</label>
-	        </div>
-					<div class="row">
-				    <form class="col s12">
-				      <div class="row">
-				        <div class="input-field col s12">
-				          <textarea v-model="hechizo.descripcion" :disabled="loading"  id="descripcion" type="text"  class="materialize-textarea"></textarea>
-				          <label for="descripcion">Descripción</label>
-				        </div>
-				      </div>
-				    </form>
-				  </div>
-					<div class="input-field col s6">
-	          <input v-model="hechizo.keywords" :disabled="loading" id="Keywords" type="text"  class="validate">
-	          <label for="Keywords">Keywords</label>
-	        </div>
-					<div class="input-field col s6">
-	          <input v-model="hechizo.copias_total" :disabled="loading"  id="Total de Copias" type="number" class="validate">
-	          <label for="Total de Copias">Total de Copias</label>
-	        </div>
-					<div class="input-field col s6">
-	          <input v-model="hechizo.copias_disponible" :disabled="loading"  id="Copias Disponibles" type="number" class="validate">
-	          <label for="Copias Disponibles">Copias Disponibles</label>
+	          <input v-model="hechizo.aprendizaje" :disabled="loading"  id="Aprendizaje" type="number" class="validate">
+	          <label for="Aprendizaje">Aprendizaje</label>
 	        </div>
 	      </div>
 				<a class="waves-effect waves-light btn-large" v-on:click="createHechizo" :disabled="loading" id="boton">
@@ -83,56 +53,6 @@
 		</div>
 	  <div id="test-swipe-2" class="col s12">
 
-			<div class="input-field col s12">
-			 <select v-model="selected" >
-				 <option v-for="hechizo in hechizos" v-bind:value="hechizo"value="1"> {{hechizo.titulo}} </option>
-			 </select>
-			 <label>Selected: {{ selected }}</label>
-		 </div>
-		 <div class="row">
-				 <div class="input-field col s6">
-					 <input type="text" v-model="hechizo.titulo" :disabled="loading"  id="Titulo1">
-					 <label for="Titulo1">Titulo</label>
-				 </div>
-				 <div class="input-field col s6">
-					 <input v-model="hechizo.genero" :disabled="loading" id="Genero1" type="text"   class="validate">
-					 <label for="Genero1">Genero</label>
-				 </div>
-				 <div class="input-field col s6">
-					 <input v-model="hechizo.autor" :disabled="loading"  id="Autor1" type="text" class="validate">
-					 <label for="Autor1">Autor</label>
-				 </div>
-				 <div class="input-field col s6">
-					 <input type="number" v-model="hechizo.publicacion" :disabled="loading"  id="Publicación1">
-					 <label for="Publicación1">Publicación</label>
-				 </div>
-				 <div class="input-field col s6">
-					 <input v-model="hechizo.editorial" :disabled="loading" id="Editorial1" type="text"  class="validate">
-					 <label for="Editorial1">Editorial</label>
-				 </div>
-				 <div class="row">
-					 <form class="col s12">
-						 <div class="row">
-							 <div class="input-field col s12">
-								 <textarea v-model="hechizo.descripcion" :disabled="loading"  id="descripcion1" type="text"  class="materialize-textarea"></textarea>
-								 <label for="descripcion1">Descripción</label>
-							 </div>
-						 </div>
-					 </form>
-				 </div>
-				 <div class="input-field col s6">
-					 <input v-model="hechizo.keywords" :disabled="loading" id="Keywords1" type="text"  class="validate">
-					 <label for="Keywords1">Keywords</label>
-				 </div>
-				 <div class="input-field col s6">
-					 <input v-model="hechizo.copias_total" :disabled="loading"  id="Total de Copias1" type="number" class="validate">
-					 <label for="Total de Copias1">Total de Copias</label>
-				 </div>
-				 <div class="input-field col s6">
-					 <input v-model="hechizo.copias_disponible" :disabled="loading"  id="Copias Disponibles1" type="number" class="validate">
-					 <label for="Copias Disponibles1">Copias Disponibles</label>
-				 </div>
-			 </div>
 				<a class="waves-effect waves-light btn-large" v-on:click="createHechizo" :disabled="loading" id="boton">
 					<i class="material-icons left">update</i>Update</a>
 
@@ -169,6 +89,7 @@
 						this.getHechizos();
 					}else{
 						sweetAlert("Oops...", "Error al crear", "error");
+						this.getHechizos();
 					}
 				});
 			},
@@ -195,27 +116,12 @@
 							swal("Deleted!", "Se ha eliminado el Libro", "success");
 						}else{
 							sweetAlert("Oops...", "Error al crear", "error");
+							this.getHechizos();
 						}
 					});
-					// swal({
-					//   title: "Are you sure?",
-					//   text: "You will not be able to recover this hechizo!",
-					//   type: "warning",
-					//   showCancelButton: true,
-					//   confirmButtonColor: "#DD6B55",
-					//   confirmButtonText: "Yes, delete it!",
-					//   cancelButtonText: "No, cancel!",
-					//   closeOnConfirm: false,
-					//   closeOnCancel: false
-					// },
-					// function(isConfirm){
-					//   if (isConfirm) {
-					//     swal("Deleted!", "Se ha eliminado el Libro", "success");
-					//
-					// 	} else {
-					//     swal("Cancelled", "No se ha eliminado nada", "error");
-					//   }
-					// });
+			},
+			startToModifyBebida(hechizo1){
+
 			}
 		},
 		beforeMount(){
