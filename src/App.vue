@@ -28,11 +28,12 @@
 </template>
 
 <script>
+import baseUrl from '../config'
 export default {
   name: 'app',
   methods:{
     logout(){
-      this.$http.get('http://localhost:8000/v1/logout').then((response)=>{
+      this.$http.get(`${baseUrl.uri}/v1/logout`).then((response)=>{
         this.$router.push('/');
       });
     }
