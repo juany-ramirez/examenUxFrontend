@@ -28,6 +28,21 @@
 				 </div>
 				 <div class="input-field col s6">
 					 <i class="material-icons prefix">view_week</i>
+					 <input id="icon_prefixf1" type="text" v-model="usuario.ocupacion">
+					 <label for="icon_prefixf1">ocupacion</label>
+				 </div>
+				 <div class="input-field col s6">
+					 <i class="material-icons prefix">view_week</i>
+					 <input id="icon_pdrefix1" type="text" v-model="usuario.nacimiento">
+					 <label for="icon_pdrefix1">nacimiento</label>
+				 </div>
+				 <div class="input-field col s6">
+					 <i class="material-icons prefix">view_week</i>
+					 <input id="icon_prefddix1" type="text" v-model="usuario.nacimiento">
+					 <label for="icon_prefddix1">creencias</label>
+				 </div>
+				 <div class="input-field col s6">
+					 <i class="material-icons prefix">view_week</i>
 					 <input id="icon_pass1" type="password" v-model="usuario.password">
 					 <label for="icon_pass1">Password</label>
 				 </div>
@@ -81,8 +96,6 @@
 
 <style scoped>
 		.contenedor{
-			background-image: url("https://static.pexels.com/photos/159621/open-book-library-education-read-159621.jpeg");
-			background-size: cover;
 	    background-repeat: no-repeat;
 			padding-left: 30%;
 			padding-right: 30%;

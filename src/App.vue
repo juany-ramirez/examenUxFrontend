@@ -4,10 +4,10 @@
       <nav class="nav-extended">
         <div class="nav-wrapper">
           <i class="fa fa-book" aria-hidden="true"></i>
-          <a href="#" class="brand-logo">Biblioteca</a>
+          <a href="#" class="brand-logo">Escuela de Hechiceros</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><router-link to="/home">Gestión de Libros</router-link></li>
-            <li><router-link to="/prestamo">Préstamos</router-link></li>
+            <li><router-link to="/home">Gestión Hechizos</router-link></li>
+            <li><router-link to="/prestamo">Usuarios</router-link></li>
             <li v-on:click="logout"><router-link to="/">Logout</router-link></li>
           </ul>
         </div>
