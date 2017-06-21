@@ -40,6 +40,7 @@
 </template>
 
 <script>
+	import baseUrl from '../config'
 	export default{
 		name: 'login',
 		data(){
@@ -55,7 +56,7 @@
 		},
 		methods: {
 			login(){
-				this.$http.post('http://localhost:8000/v1/login', this.user).then((response)=>{
+				this.$http.post(`${baseUrl.uri}v1/login`, this.user).then((response)=>{
 					this.$router.push('/home');
 					swal("Bienvenido!", response.body.username.toUpperCase() ,"success");
 				});
@@ -63,7 +64,7 @@
 			register(){
 				console.log("ddddd");
 				this.usuario.scope = ['admin'];
-				this.$http.post('http://localhost:8000/v1/register', this.usuario).then((response)=>{
+				this.$http.post(`${baseUrl.uri}v1/register`, this.usuario).then((response)=>{
 					this.$router.push('/home');
 					swal("Se ha creado tu usuario", response.body.username, "success");
 				});

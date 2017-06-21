@@ -144,6 +144,7 @@
 </template>
 
 <script>
+	import baseUrl from '../config'
 	export default{
 		name: 'home',
 		data(){
@@ -156,13 +157,13 @@
 		},
 		methods: {
 			getBooks(){
-				this.$http.get('http://localhost:8000/books').then((response)=>{
+				this.$http.get(`${baseUrl.uri}/books`).then((response)=>{
 					this.books=response.body;
 				});
 			},
 			createBook(){
 				this.loading=true;
-				this.$http.post('http://localhost:8000/books/create',this.book)
+				this.$http.post(`${baseUrl.uri}/books/create`,this.book)
 				.then((response)=>{
 					this.loading=false;
 					if(response.body.success){
@@ -175,7 +176,7 @@
 			},
 			modifyBook(id){
 				this.loading=true;
-				this.$http.update('http://localhost:8000/books/update/'+identidad,this.book)
+				this.$http.update(`${baseUrl.uri}/books/update/`+identidad,this.book)
 				.then((response)=>{
 					this.loading=false;
 					if(response.body.success){
@@ -188,7 +189,7 @@
 			},
 			deleteBook(id){
 					this.loading=true;
-					this.$http.delete('http://localhost:8000/books/delete/'+id)
+					this.$http.delete(`${baseUrl.uri}/books/delete/`+id)
 						.then((response)=>{
 						this.loading=false;
 						if(response.body.success){
