@@ -66,6 +66,7 @@
 </template>
 
 <script>
+	import baseUrl from '../../config'
 	export default{
 		name: 'prestamo',
 		data(){
@@ -80,13 +81,13 @@
 		},
 		methods: {
 			getBooks(){
-				this.$http.get('http://localhost:8000/books').then((response)=>{
+				this.$http.get(`${baseUrl.uri}/books`).then((response)=>{
 					this.books=response.body;
 				});
 			},
 			prestarBook(id){
 				this.loading=true;
-				this.$http.put('http://localhost:8000/books/borrowbook/'+id)
+				this.$http.put(`${baseUrl.uri}/books/borrowbook/`+id)
 				.then((response)=>{
 						this.loading=false;
 						if(response.body === 'updated succesfully'){
@@ -101,32 +102,32 @@
 				console.log(this.elElegido);
 				console.log(this.searchText);
 				if(this.searchText===''){
-					this.$http.get('http://localhost:8000/books').then((response)=>{
+					this.$http.get(`${baseUrl.uri}/books`).then((response)=>{
 				this.loading=false;
 						this.books=response.body;
 					});
 				}else if(elElegido ===1){
-						this.$http.get('http://localhost:8000/books/searchbyname/'+searchText).then((response)=>{
+						this.$http.get(`${baseUrl.uri}/books/searchbyname/`+searchText).then((response)=>{
 							this.books=response.body;
 						});
 						searchText='';
 				}else if(elElegido ===2){
-						this.$http.get('http://localhost:8000/books/searchbyid/'+searchText).then((response)=>{
+						this.$http.get(`${baseUrl.uri}/books/searchbyid/`+searchText).then((response)=>{
 							this.books=response.body;
 						});
 						searchText='';
 				}else if(elElegido ===3){
-						this.$http.get('http://localhost:8000/books/searchbygenre/'+searchText).then((response)=>{
+						this.$http.get(`${baseUrl.uri}/books/searchbygenre/`+searchText).then((response)=>{
 							this.books=response.body;
 						});
 						searchText='';
 				}else if(elElegido ===4){
-						this.$http.get('http://localhost:8000/books/searchbyauthor/'+searchText).then((response)=>{
+						this.$http.get(`${baseUrl.uri}/books/searchbyauthor/`+searchText).then((response)=>{
 							this.books=response.body;
 						});
 						searchText='';
 				}else if(elElegido ===5){
-						this.$http.get('http://localhost:8000/books/searchbykey',searchText).then((response)=>{
+						this.$http.get(`${baseUrl.uri}/books/searchbykey`,searchText).then((response)=>{
 							this.books=response.body;
 						});
 						searchText='';

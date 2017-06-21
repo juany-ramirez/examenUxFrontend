@@ -40,7 +40,7 @@
 </template>
 
 <script>
-	import baseUrl from '../config'
+	import baseUrl from '../../config'
 	export default{
 		name: 'login',
 		data(){
